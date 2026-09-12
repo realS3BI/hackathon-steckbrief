@@ -62,6 +62,27 @@ DNS für `hackathon.schlossers.at` auf den Coolify-Server zeigen lassen und die 
 
 Cookies und lokale Entwürfe wechseln nicht mit der Domain. Vorher auf der alten Domain unveröffentlichte Entwürfe und den persönlichen Bearbeitungscode sichern. Danach auf der neuen Domain das Team-Passwort eingeben und den Steckbrief über „Already have a profile?“ mit dem Code verbinden. Die veröffentlichten Profile bleiben im bestehenden `team-data`-Volume.
 
+### Alte Profil-Domain weiterleiten
+
+`next.config.ts` leitet Anfragen an `profile.schlossers.at` dauerhaft mit HTTP 308 nach `https://hackathon.schlossers.at/music-ai-2026/profile` weiter. Auch alte Unterpfade landen beim Teamalbum; Query-Parameter bleiben erhalten. Die Regel gilt ausschließlich für den alten Hostnamen. Die neue Domain und lokale Entwicklung bleiben davon unberührt.
+
+DNS-Einträge in der Zone `schlossers.at`:
+
+| Typ | Name | Ziel |
+| --- | --- | --- |
+| A | `hackathon` | `176.9.4.36` |
+| CNAME | `profile` | `hackathon.schlossers.at` |
+
+Diese Einträge waren am 12. September 2026 bereits öffentlich auflösbar. Bei einem Serverwechsel den A-Eintrag auf die neue Coolify-Server-IP ändern. DNS-Einträge enthalten keine URL-Pfade.
+
+In Coolify **beide Domains demselben Service `huettentoene`** zuweisen. Für beide Protokoll `https`, internen Port `3000` und ein leeres Path-Feld verwenden. Mit einem gemeinsamen Domains-Eingabefeld lautet der Wert:
+
+```text
+https://hackathon.schlossers.at:3000,https://profile.schlossers.at:3000
+```
+
+Coolify stellt dadurch auch für die alte Domain HTTPS bereit. Die App führt anschließend die Weiterleitung aus. Die alte Domain in DNS und Coolify behalten und keiner zweiten Anwendung zuweisen. Zusätzliche Umgebungsvariablen sind nicht nötig. Code pushen, Konfiguration speichern und neu deployen. Die Domainformate beschreibt die [Coolify-Dokumentation](https://coolify.io/docs/core/networking/domains#supported-domain-formats).
+
 Nur **eine Instanz** betreiben. Die Anwendung verwendet die in Node.js enthaltene SQLite-Datenbank mit WAL und benötigt keinen separaten Datenbankcontainer. Für mehrere Replikas müsste die Speicherung auf eine gemeinsam erreichbare Datenbank umgestellt werden. Ein bereits bestehendes oder manuell eingebundenes Datenverzeichnis muss für UID/GID 1000 beschreibbar sein.
 
 Für Docker Compose ohne Coolify gibt es eine Ergänzung mit Host-Port:
