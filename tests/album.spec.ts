@@ -54,7 +54,7 @@ test("shared persistence, validation, ownership, recovery, and version conflicts
 test("team password gates every data path and logout revokes the session", async ({ browser }) => {
   const context = await browser.newContext({ baseURL: "http://127.0.0.1:3101" });
   const page = await context.newPage();
-  await page.goto("/music-ai-2026/profile");
+  await page.goto("/2026/music-ai/profile");
   await expect(page.getByLabel("Team password", { exact: true })).toBeVisible();
   const input = { ...emptyProfile(), name: "Private Test" };
   expect((await context.request.get("/api/profiles")).status()).toBe(401);
@@ -79,7 +79,7 @@ test("team password gates every data path and logout revokes the session", async
 test("fill, save, find, edit, present, and print profiles on desktop and mobile", async ({ page, browser }, testInfo) => {
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));
-  await page.goto("/music-ai-2026/profile");
+  await page.goto("/2026/music-ai/profile");
   await expect(page.getByRole("button", { name: "This is me", exact: true })).toBeEnabled();
   await page.getByRole("button", { name: "Choose color theme" }).click();
   await expect(page.getByRole("menuitemradio", { name: "System" })).toHaveAttribute("data-state", "checked");
@@ -123,7 +123,7 @@ test("fill, save, find, edit, present, and print profiles on desktop and mobile"
 
   const other = await browser.newContext();
   const otherPage = await other.newPage();
-  await otherPage.goto("http://127.0.0.1:3100/music-ai-2026/profile");
+  await otherPage.goto("http://127.0.0.1:3100/2026/music-ai/profile");
   await expect(otherPage.getByRole("heading", { name: "Alex Test", exact: true })).toBeVisible();
   const fixtures = [];
   for (const person of [{ name: "Mika Demo", color: "berry", avatar: "guitar", role: "Music education and curious questions", song: "Aruarian Dance · Nujabes", motto: "Good ideas do not need sheet music." }, { name: "Noa Demo", color: "sky", avatar: "waveform", role: "Design for people", song: "Everything in Its Right Place · Radiohead", motto: "Fewer barriers. More music." }]) {
@@ -163,7 +163,7 @@ test("fill, save, find, edit, present, and print profiles on desktop and mobile"
   const mobilePage = await ownerContext.newPage();
   mobilePage.on("pageerror", error => errors.push(error.message));
   await mobilePage.setViewportSize({ width: 390, height: 844 });
-  await mobilePage.goto("/music-ai-2026/profile");
+  await mobilePage.goto("/2026/music-ai/profile");
   await mobilePage.screenshot({ path: testInfo.outputPath("mobile-team.png"), fullPage: true });
   expect(await mobilePage.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
   await mobilePage.getByRole("button", { name: "My profile", exact: true }).click();

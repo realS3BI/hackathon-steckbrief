@@ -2,7 +2,7 @@ import { Accessibility, AudioLines, AudioWaveform, CableCar, Drum, Guitar, Headp
 import Link from "next/link";
 import { initials, type ProfileInput } from "@/lib/profile";
 import { cn } from "@/lib/utils";
-import { MUSIC_PATH } from "@/lib/routes";
+import { MUSIC_EVENT_PATH } from "@/lib/routes";
 
 export const avatarIcons = {
   headphones: Headphones,
@@ -53,7 +53,7 @@ export function Identity({ person, large = false }: { person: Pick<ProfileInput,
 }
 
 export function Brand({ compact = false }: { compact?: boolean }) {
-  return <Link className="brand" href={MUSIC_PATH} aria-label="Summit Sounds, home"><span className="brand-symbol"><AudioLines aria-hidden="true" /></span><span>summit<span className="brand-rest"> sounds</span><span className="brand-dot">.</span>{!compact && <small>Music for everyone</small>}</span></Link>;
+  return <Link className="brand" href={MUSIC_EVENT_PATH} aria-label="Summit Sounds, event home"><span className="brand-symbol"><AudioLines aria-hidden="true" /></span><span>summit<span className="brand-rest"> sounds</span><span className="brand-dot">.</span>{!compact && <small>Music for everyone</small>}</span></Link>;
 }
 
 export function RecordArtwork() {

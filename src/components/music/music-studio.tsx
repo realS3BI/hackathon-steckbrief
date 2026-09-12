@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, AudioLines, BookOpen, Check, Keyboard, Music2, Square, Type, Users } from "lucide-react";
 import { Brand } from "@/components/identity";
+import { MusicTrail } from "@/components/portal/breadcrumbs";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -85,6 +86,7 @@ export function MusicStudio() {
 
   return <div className="site-shell music-studio" data-large-text={largeText}>
     <header className="site-header studio-header"><Brand /><nav aria-label="Main navigation"><Link className="nav-link studio-current-link" href={MUSIC_PATH} aria-current="page">Learn & create</Link><Link className="studio-team-link" href={PROFILE_PATH}><Users aria-hidden="true" />Team</Link><ThemeToggle /></nav></header>
+    <MusicTrail current="Knowledge & Create" />
     <main id="main">
       <section className="studio-welcome" aria-labelledby="studio-title">
         <div><h1 id="studio-title">Make room<br />for your music.</h1><p>A little curiosity is all you need. Explore a few sounds, make a few choices, and hear what you create.</p><div className="welcome-actions"><Button size="lg" onClick={() => { changeTab("learn"); learnTab.current?.focus(); learnTab.current?.scrollIntoView({ block: "start", behavior: "instant" }); }}><BookOpen data-icon="inline-start" />Start with a little learning</Button><Button variant="ghost" onClick={() => goCreate()}>Go straight to creating<ArrowRight data-icon="inline-end" /></Button></div></div>

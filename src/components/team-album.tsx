@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { api, ApiError } from "@/lib/client";
 import type { Album } from "@/lib/profile";
 import { Brand, RecordArtwork } from "./identity";
+import { MusicTrail } from "@/components/portal/breadcrumbs";
 import { ProfileCard } from "./profile-card";
 import { ProfileEditor } from "./profile-editor";
 import { ProfileDetail } from "./profile-detail";
@@ -84,6 +85,7 @@ export function TeamAlbum() {
   return <>
     <div className="site-shell">
       <header className="site-header"><Brand /><nav aria-label="Main navigation"><Link href={MUSIC_PATH} className="nav-link album-learn-link">Learn & create</Link><Button className="nav-presentation" variant="ghost" onClick={() => setPresenting(true)} disabled={!album?.profiles.length}><PresentationIcon data-icon="inline-start" /><span className="nav-present-label">Present</span></Button><ThemeToggle /><Button ref={createButton} onClick={() => setEditor(true)} disabled={!album}><span className="hidden sm:inline">{mine ? "My profile" : "Create profile"}</span><span className="sm:hidden">{mine ? "My profile" : "Join in"}</span>{mine ? <Pencil data-icon="inline-end" /> : <Plus data-icon="inline-end" />}</Button></nav></header>
+      <MusicTrail current="Team album" />
       <main id="main">
         <section className="hero" aria-labelledby="hero-title"><div className="hero-copy"><Badge variant="outline"><span className="live-dot" />Music & AI Hackathon 2026</Badge><h1 id="hero-title">Different minds.<br />One shared<br className="desktop-break" /> rhythm.</h1><p>Before we make music more accessible together,<br className="desktop-break" /> let us get to know one another. This is our team album.</p><div className="hero-actions"><Button size="lg" onClick={() => setEditor(true)} disabled={!album}>{mine ? "Edit your profile" : "This is me"}{mine ? <Pencil data-icon="inline-end" /> : <Plus data-icon="inline-end" />}</Button><a href="#team" className="text-link">Meet the team<ArrowDown aria-hidden="true" /></a></div><div className="hero-note"><Clock3 aria-hidden="true" /><span>About five minutes. Share only what feels right.</span></div></div><RecordArtwork /></section>
         <aside className="challenge-strip" aria-label="Our challenge and location"><div className="challenge-description"><span className="challenge-icon"><Accessibility aria-hidden="true" /></span><div><span>Our challenge #6</span><h2>Accessibility & Music</h2></div><p>Everyone should be able to make music.<br />We are finding ways to make that happen.</p></div><div className="location"><Mountain aria-hidden="true" /><div><strong>Rudolfshütte</strong><span>2,315 m above the everyday</span></div></div></aside>

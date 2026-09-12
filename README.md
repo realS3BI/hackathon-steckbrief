@@ -1,14 +1,18 @@
-# Summit Sounds
+# Hackathon notes
+
+Die Startseite sammelt Hackathons nach Jahren. Aktuell enthält sie Music & AI 2026 auf der Rudolfshütte. Die drei Landingpages sind `/`, `/2026` und `/2026/music-ai`; vom Event führen Links zur Wissensbasis und zum Teamalbum. Alle Seiten unterstützen mobile Ansichten sowie System-, Hell- und Dunkelmodus.
+
+Die physischen Seitenordner folgen `src/app/2026/music-ai/...`. Weitere Events werden in `src/lib/hackathons.ts` eingetragen und erhalten eine Seite unter `src/app/<jahr>/<event>/page.tsx`. Die gemeinsame Übersicht liest diese Liste automatisch. Aufbau und Erweiterung stehen in [docs/hackathon-portal.md](docs/hackathon-portal.md).
 
 Eine Musik-Wissensbasis mit spielbarem Creator und ein gemeinsames Teamalbum für die Challenge **Accessibility & Music** beim [Music & AI Hackathon](https://music-ai-hackathon.com/) auf der Rudolfshütte. Gebaut mit Next.js 16, React 19, TypeScript, Tailwind CSS 4 und shadcn/ui mit Radix. Die Oberfläche ist auf Englisch.
 
 ## Knowledge & Create
 
-- `/music-ai-2026/knowledge-and-create`: fünf kurze Lektionen mit hörbaren Beispielen zu Tempo, Rhythmus, Melodie, Klang und Stimmung. Eine Wahl aus der Lektion lässt sich direkt in den Creator übernehmen.
+- `/2026/music-ai/knowledge-and-create`: fünf kurze Lektionen mit hörbaren Beispielen zu Tempo, Rhythmus, Melodie, Klang und Stimmung. Eine Wahl aus der Lektion lässt sich direkt in den Creator übernehmen.
 - Der Creator erzeugt aus Stimmung, Tempo, Klang und optionalem Beat ein Instrumentalstück. Anhören, verändern und als WAV herunterladen funktioniert ohne Konto oder API-Schlüssel.
 - Große beschriftete Bedienelemente, Tastaturbedienung, optionales Vorlesen, größere Schrift, eine visuelle Melodieansicht und Hell/Dunkel/System-Umschaltung. Ton startet nur auf Wunsch. Die Notenverfolgung ist standardmäßig aus.
 - Das ist ein **prozeduraler Instrumental-Prototyp**, keine trainierte Musik-KI. Gesang und eine externe KI-Musik-API sind noch nicht angebunden. Audio entsteht im Browser und wird nicht hochgeladen. Downloads vor dem Verlassen oder Erzeugen einer neuen Version sichern.
-- `/music-ai-2026/profile`: das bestehende Teamalbum. Einladungslinks zeigen auf diesen Pfad. `/` und `/music-ai-2026` leiten zur Wissensbasis weiter.
+- `/2026/music-ai/profile`: das bestehende Teamalbum. Einladungslinks zeigen auf diesen Pfad. `/` zeigt alle Hackathons, `/2026` die Jahresübersicht und `/2026/music-ai` die Event-Landingpage.
 
 Das [Konzept](docs/knowledge-and-create.md) beschreibt die Zielgruppen, den Lernweg, Antworten auf alle drei Challenge-Fragen, Grenzen des Prototyps und die spätere KI-Anbindung.
 
@@ -57,14 +61,16 @@ Die Compose-Datei veröffentlicht keinen festen Host-Port; Coolifys Proxy erreic
 
 DNS für `hackathon.schlossers.at` auf den Coolify-Server zeigen lassen und die Anwendung nach dem Domainwechsel neu deployen. Es gibt dafür keine zusätzlichen Port- oder Pfad-Umgebungsvariablen. Beide Seiten laufen im selben Container:
 
-- `https://hackathon.schlossers.at/music-ai-2026/knowledge-and-create`
-- `https://hackathon.schlossers.at/music-ai-2026/profile`
+- `https://hackathon.schlossers.at/2026/music-ai/knowledge-and-create`
+- `https://hackathon.schlossers.at/2026/music-ai/profile`
+
+Die alten `/music-ai-2026`-Links werden dauerhaft auf die entsprechenden Pfade unter `/2026/music-ai` weitergeleitet. Die neue Ordnerstruktur benötigt keine Änderungen in DNS oder Coolify. Das Path-Feld bleibt leer, das vorhandene Profil-Volume erhalten.
 
 Cookies und lokale Entwürfe wechseln nicht mit der Domain. Vorher auf der alten Domain unveröffentlichte Entwürfe und den persönlichen Bearbeitungscode sichern. Danach auf der neuen Domain das Team-Passwort eingeben und den Steckbrief über „Already have a profile?“ mit dem Code verbinden. Die veröffentlichten Profile bleiben im bestehenden `team-data`-Volume.
 
 ### Alte Profil-Domain weiterleiten
 
-`next.config.ts` leitet Anfragen an `profile.schlossers.at` dauerhaft mit HTTP 308 nach `https://hackathon.schlossers.at/music-ai-2026/profile` weiter. Auch alte Unterpfade landen beim Teamalbum; Query-Parameter bleiben erhalten. Die Regel gilt ausschließlich für den alten Hostnamen. Die neue Domain und lokale Entwicklung bleiben davon unberührt.
+`next.config.ts` leitet Anfragen an `profile.schlossers.at` dauerhaft mit HTTP 308 nach `https://hackathon.schlossers.at/2026/music-ai/profile` weiter. Auch alte Unterpfade landen beim Teamalbum; Query-Parameter bleiben erhalten. Die Regel gilt ausschließlich für den alten Hostnamen. Die neue Domain und lokale Entwicklung bleiben davon unberührt.
 
 DNS-Einträge in der Zone `schlossers.at`:
 

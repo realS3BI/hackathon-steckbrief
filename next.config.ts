@@ -7,7 +7,11 @@ const nextConfig: NextConfig = {
     return [{
       source: "/:path*",
       has: [{ type: "host", value: "profile\\.schlossers\\.at" }],
-      destination: "https://hackathon.schlossers.at/music-ai-2026/profile",
+      destination: "https://hackathon.schlossers.at/2026/music-ai/profile",
+      permanent: true,
+    }, {
+      source: "/music-ai-2026/:path*",
+      destination: "/2026/music-ai/:path*",
       permanent: true,
     }];
   },

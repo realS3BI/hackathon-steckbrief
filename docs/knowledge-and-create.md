@@ -61,9 +61,9 @@ Before a public launch, invite children with an appropriate adult, older beginne
 
 ## Routes and data
 
-- `/music-ai-2026/knowledge-and-create` is public and has no account requirement.
-- `/music-ai-2026/profile` keeps the existing team album and its optional team password.
-- `/` and `/music-ai-2026` lead to Knowledge & Create.
+- `/2026/music-ai/knowledge-and-create` is public and has no account requirement.
+- `/2026/music-ai/profile` keeps the existing team album and its optional team password.
+- `/` lists the hackathons, `/2026` introduces the year, and `/2026/music-ai` introduces this event. The old `/music-ai-2026` prefix permanently redirects to `/2026/music-ai`.
 - Existing `/api` routes and the SQLite volume remain in place.
 - Music is generated in the browser. It is not uploaded or added to the shared profiles. Download it before leaving. Browser read-aloud uses the device's available speech service; its availability and processing depend on the browser and installed voice.
 

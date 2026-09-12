@@ -1,9 +1,22 @@
 import { expect, test } from "@playwright/test";
-import { MUSIC_PATH, PROFILE_PATH } from "../src/lib/routes";
+import { MUSIC_EVENT_PATH, MUSIC_PATH, PROFILE_PATH } from "../src/lib/routes";
+
+test("bookmarks from the previous folder structure keep their destination and query", async ({ request }) => {
+  for (const [source, destination] of [
+    ["/music-ai-2026", MUSIC_EVENT_PATH],
+    ["/music-ai-2026/profile", PROFILE_PATH],
+    ["/music-ai-2026/knowledge-and-create", MUSIC_PATH],
+    ["/music-ai-2026/profile?from=invite", `${PROFILE_PATH}?from=invite`],
+  ]) {
+    const response = await request.get(source, { maxRedirects: 0 });
+    expect(response.status()).toBe(308);
+    expect(response.headers().location).toBe(destination);
+  }
+});
 
 test("the old profile domain redirects to the team album without affecting other hosts", async ({ request }) => {
   const destination = `https://hackathon.schlossers.at${PROFILE_PATH}`;
-  for (const path of ["/", PROFILE_PATH, "/old/bookmark"]) {
+  for (const path of ["/", PROFILE_PATH, "/music-ai-2026/profile", "/old/bookmark"]) {
     const response = await request.get(path, {
       headers: { Host: "profile.schlossers.at" },
       maxRedirects: 0,

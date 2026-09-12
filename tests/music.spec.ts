@@ -29,7 +29,7 @@ test("the composer keeps a tune across tempo changes and exports bounded PCM aud
 test("learn, carry a choice into creation, play, download, and reach the team", async ({ page }, testInfo) => {
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));
-  await page.goto("/");
+  await page.goto(MUSIC_PATH);
   await expect(page).toHaveURL(new RegExp(MUSIC_PATH));
   await expect(page.getByRole("heading", { name: "How fast does music move?" })).toBeVisible();
   expect(await page.locator("audio").evaluateAll(elements => elements.every(element => (element as HTMLAudioElement).paused))).toBe(true);
@@ -77,7 +77,7 @@ test("learn, carry a choice into creation, play, download, and reach the team", 
 test("public learning stays accessible with a protected album, dark mode, and large mobile text", async ({ browser }, testInfo) => {
   const context = await browser.newContext({ baseURL: "http://127.0.0.1:3101", viewport: { width: 390, height: 844 }, colorScheme: "dark", reducedMotion: "reduce" });
   const page = await context.newPage();
-  await page.goto("/music-ai-2026");
+  await page.goto(MUSIC_PATH);
   await expect(page).toHaveURL(new RegExp(MUSIC_PATH));
   await expect(page.locator("html")).toHaveClass(/dark/);
   await page.getByRole("button", { name: "Bigger text", exact: true }).click();

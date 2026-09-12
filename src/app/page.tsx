@@ -1,6 +1,5 @@
-import { redirect } from "next/navigation";
-import { MUSIC_PATH } from "@/lib/routes";
+import { ArchiveLanding } from "@/components/portal/archive-landing";
 
 export default function Home() {
-  redirect(MUSIC_PATH);
+  return <ArchiveLanding />;
 }

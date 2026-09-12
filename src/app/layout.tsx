@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
+import "./portal.css";
 
 export const metadata: Metadata = {
-  title: "Summit Sounds | Music for everyone",
-  description: "Learn, create music, and meet our Accessibility & Music hackathon team.",
+  title: "Hackathon notes | Projects, experiments & people",
+  description: "Explore our hackathons, try the projects, and meet the people who made them. A collection by schlossers.at.",
   robots: { index: false, follow: false },
   icons: { icon: "/icon.svg" },
 };
