@@ -1,6 +1,16 @@
 # Summit Sounds
 
-Ein gemeinsames Teamalbum für die Challenge **Accessibility & Music** beim [Music & AI Hackathon](https://music-ai-hackathon.com/) auf der Rudolfshütte. Gebaut mit Next.js 16, React 19, TypeScript, Tailwind CSS 4 und shadcn/ui mit Radix.
+Eine Musik-Wissensbasis mit spielbarem Creator und ein gemeinsames Teamalbum für die Challenge **Accessibility & Music** beim [Music & AI Hackathon](https://music-ai-hackathon.com/) auf der Rudolfshütte. Gebaut mit Next.js 16, React 19, TypeScript, Tailwind CSS 4 und shadcn/ui mit Radix. Die Oberfläche ist auf Englisch.
+
+## Knowledge & Create
+
+- `/music-ai-2026/knowledge-and-create`: fünf kurze Lektionen mit hörbaren Beispielen zu Tempo, Rhythmus, Melodie, Klang und Stimmung. Eine Wahl aus der Lektion lässt sich direkt in den Creator übernehmen.
+- Der Creator erzeugt aus Stimmung, Tempo, Klang und optionalem Beat ein Instrumentalstück. Anhören, verändern und als WAV herunterladen funktioniert ohne Konto oder API-Schlüssel.
+- Große beschriftete Bedienelemente, Tastaturbedienung, optionales Vorlesen, größere Schrift, eine visuelle Melodieansicht und Hell/Dunkel/System-Umschaltung. Ton startet nur auf Wunsch. Die Notenverfolgung ist standardmäßig aus.
+- Das ist ein **prozeduraler Instrumental-Prototyp**, keine trainierte Musik-KI. Gesang und eine externe KI-Musik-API sind noch nicht angebunden. Audio entsteht im Browser und wird nicht hochgeladen. Downloads vor dem Verlassen oder Erzeugen einer neuen Version sichern.
+- `/music-ai-2026/profile`: das bestehende Teamalbum. Einladungslinks zeigen auf diesen Pfad. `/` und `/music-ai-2026` leiten zur Wissensbasis weiter.
+
+Das [Konzept](docs/knowledge-and-create.md) beschreibt die Zielgruppen, den Lernweg, Antworten auf alle drei Challenge-Fragen, Grenzen des Prototyps und die spätere KI-Anbindung.
 
 ## Was die Seite kann
 
@@ -37,13 +47,20 @@ npm run start:standalone
 
 ## Auf Coolify deployen
 
-1. Das Repository zu deinem Git-Anbieter pushen und in Coolify eine neue Anwendung mit diesem Repository anlegen.
+1. Das Repository zu deinem Git-Anbieter pushen. Für den Domainwechsel die bestehende Coolify-Anwendung weiterverwenden, damit das Profil-Volume erhalten bleibt.
 2. Als Build Pack **Docker Compose** wählen. Compose-Datei: `/compose.yaml`, Basisverzeichnis: `/`.
-3. Dem Service `huettentoene` eine Domain mit **internem Port 3000** zuweisen. Beispielsweise `https://team.example.org:3000`, wenn Coolify den Zielport im Domainfeld erwartet. HTTPS in Coolify aktivieren.
+3. Dem Service `huettentoene` im Domain-Dialog Protokoll `https`, Domain `hackathon.schlossers.at` und **internen Port `3000`** zuweisen. Das Feld **Path leer lassen**. Die Anwendung verwaltet die beiden Pfade selbst. In Coolify-Versionen mit einem gemeinsamen Domainfeld lautet der Eintrag `https://hackathon.schlossers.at:3000`. Im Browser wird kein Port angehängt. Siehe [Coolifys Dokumentation zum Containerport](https://coolify.io/docs/applications/builds/docker-compose#configure-public-services).
 4. Optional `TEAM_PASSWORD` als Laufzeitvariable setzen. Ein leeres Passwort bedeutet freien Zugang für alle mit dem Link.
 5. Deployen. `/api/health` prüft den Server und die Datenbank. Das Volume `team-data` speichert die Profile unter `/app/data` und bleibt bei normalen Redeployments erhalten.
 
 Die Compose-Datei veröffentlicht keinen festen Host-Port; Coolifys Proxy erreicht den internen Port. Das Containerimage startet als unprivilegierter Benutzer `node`. Das Datenverzeichnis gehört diesem Benutzer bereits im Image, und ein neu erstelltes benanntes Volume übernimmt diese Rechte.
+
+DNS für `hackathon.schlossers.at` auf den Coolify-Server zeigen lassen und die Anwendung nach dem Domainwechsel neu deployen. Es gibt dafür keine zusätzlichen Port- oder Pfad-Umgebungsvariablen. Beide Seiten laufen im selben Container:
+
+- `https://hackathon.schlossers.at/music-ai-2026/knowledge-and-create`
+- `https://hackathon.schlossers.at/music-ai-2026/profile`
+
+Cookies und lokale Entwürfe wechseln nicht mit der Domain. Vorher auf der alten Domain unveröffentlichte Entwürfe und den persönlichen Bearbeitungscode sichern. Danach auf der neuen Domain das Team-Passwort eingeben und den Steckbrief über „Already have a profile?“ mit dem Code verbinden. Die veröffentlichten Profile bleiben im bestehenden `team-data`-Volume.
 
 Nur **eine Instanz** betreiben. Die Anwendung verwendet die in Node.js enthaltene SQLite-Datenbank mit WAL und benötigt keinen separaten Datenbankcontainer. Für mehrere Replikas müsste die Speicherung auf eine gemeinsam erreichbare Datenbank umgestellt werden. Ein bereits bestehendes oder manuell eingebundenes Datenverzeichnis muss für UID/GID 1000 beschreibbar sein.
 
@@ -88,6 +105,10 @@ Docker ist in der Entwicklungsumgebung nicht installiert. Der tatsächliche Cont
 | Datei | Aufgabe |
 | --- | --- |
 | `src/lib/profile.ts` | Fragen, Profiltypen und Validierung |
+| `src/lib/routes.ts` | Gemeinsame Pfade für Musikbereich und Teamalbum |
+| `src/lib/music/knowledge.ts` | Lektionen, Beispiele und musikalische Auswahlmöglichkeiten |
+| `src/lib/music/composer.ts` | Prozedurale Komposition und WAV-Synthese |
+| `src/components/music/` | Wissensbasis, Creator und Audiobedienung |
 | `src/lib/server/store.ts` | SQLite und Eigentumsprüfung |
 | `src/lib/server/http.ts` | Teamzugang, Cookies, Ursprung, Limits und Fehler |
 | `src/app/api/` | HTTP-Endpunkte |

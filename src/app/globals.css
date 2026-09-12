@@ -486,7 +486,7 @@
 @media print {
   @page { size: A4 landscape; margin: 12mm; }
   html, body { background: white; overflow: visible !important; height: auto !important; }
-  body > *:not(.print-sheets) { display: none !important; }
+  body:has(> .print-sheets) > *:not(.print-sheets) { display: none !important; }
   body > .print-sheets { display: block !important; }
   .print-sheets { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .print-sheet { break-after: page; height: 183mm; display: flex; flex-direction: column; background: var(--background); padding: 8mm 10mm; }

@@ -1,0 +1,159 @@
+.music-studio { --studio-text: 1rem; font-size: var(--studio-text); }
+.music-studio[data-large-text="true"] { --studio-text: 1.25rem; }
+.studio-header nav { gap: 20px; }
+.studio-team-link { min-height: 48px; display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; }
+.studio-team-link svg { width: 19px; height: 19px; }
+.studio-welcome { display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 52px; padding: 55px 0 42px; }
+.studio-welcome h1 { font-size: clamp(2.75em, 4.3vw, 3.6em); font-weight: 750; letter-spacing: -.045em; line-height: 1.06; }
+.studio-welcome p { max-width: 37em; margin-top: 20px; line-height: 1.75; color: var(--muted-foreground); font-size: 1.05em; }
+.welcome-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.music-studio [data-slot="button"], .studio-tool-buttons [data-slot="toggle"] { min-height: 48px; height: auto; padding: 11px 16px; font-size: .9em; white-space: normal; }
+.welcome-score { padding: 28px; background: var(--person-bg); color: var(--person-ink); border-radius: 22px 22px 70px 22px; transform: rotate(2deg); }
+.welcome-score-label { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.welcome-score-label svg { width: 25px; height: 25px; }
+.score-caption { display: flex; flex-direction: column; gap: 4px; font-size: .85em; line-height: 1.5; }
+.score-caption span:last-child { font-weight: 600; }
+.music-score { position: relative; padding: 25px 0 24px 48px; }
+.score-labels { position: absolute; top: 28px; bottom: 57px; left: 0; display: flex; flex-direction: column; justify-content: space-between; font-size: .65em; }
+.score-grid { position: relative; height: 124px; }
+.score-line { position: absolute; inset-inline: 0; height: 1px; background: currentColor; opacity: .28; }
+.score-note { position: absolute; height: 23px; min-width: 10px; border-radius: 7px; border: 1.5px solid var(--person-ink); background: var(--person-bg); }
+.score-note[data-playing="true"] { outline: 3px solid var(--person-ink); outline-offset: 3px; }
+.score-count { display: grid; grid-template-columns: repeat(8, 1fr); font-size: .68em; margin-top: 15px; }
+.studio-tools { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 18px 0; border-top: 1px solid var(--border); }
+.studio-tools > span { display: inline-flex; align-items: center; gap: 9px; font-size: .85em; color: var(--muted-foreground); }
+.studio-tools > span svg { width: 20px; height: 20px; }
+.studio-tool-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.studio-workbook { margin-top: 15px; }
+.studio-tabs[data-slot="tabs-list"] { height: auto; min-height: 60px; padding: 5px; width: 440px; max-width: 100%; }
+.studio-tabs [data-slot="tabs-trigger"] { min-height: 50px; padding: 12px 26px; font-size: 1em; gap: 10px; white-space: normal; }
+.studio-panel { margin-top: 24px; font-size: 1em; scroll-margin-top: 20px; }
+.studio-panel[hidden] { display: none; }
+.knowledge-panel { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 42px; }
+.lesson-topics h2 { font-size: 1em; font-weight: 650; line-height: 1.4; }
+.lesson-topics svg { width: 20px; height: 20px; flex-shrink: 0; }
+.lesson-topics > p { color: var(--muted-foreground); font-size: .88em; line-height: 1.6; margin-top: 9px; }
+.topic-options { display: flex; flex-direction: column; align-items: stretch; width: 100%; gap: 8px; margin-top: 22px; }
+.topic-options [data-slot="toggle-group-item"] { min-height: 50px; justify-content: flex-start; padding: 12px 17px; font-size: 1em; }
+.lesson-page { min-width: 0; background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 16px; }
+.lesson-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.lesson-title-row h3 { font-size: 1.65em; font-weight: 650; line-height: 1.18; letter-spacing: -.035em; }
+.lesson-text { line-height: 1.85; margin-top: 18px; max-width: 65ch; }
+.lesson-examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 28px; }
+.lesson-example { display: flex; flex-direction: column; min-width: 0; }
+.example-pattern { height: 88px; border-radius: 12px; background: var(--person-bg); color: var(--person-ink); display: flex; align-items: center; justify-content: space-evenly; padding: 16px 20px; gap: 8px; }
+.example-pattern i { width: 10px; border-radius: 10px; background: currentColor; }
+.lesson-example h4 { font-size: 1.1em; font-weight: 650; margin-top: 15px; }
+.lesson-example > p { font-size: .9em; color: var(--muted-foreground); line-height: 1.7; margin: 7px 0 16px; }
+.example-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+.example-player { padding: 18px 0 0; }
+.example-player > p { display: flex; align-items: center; gap: 8px; font-size: .9em; margin-bottom: 10px; }
+.example-player > p svg { width: 18px; height: 18px; }
+.music-studio audio { width: 100%; min-width: 0; min-height: 54px; border-radius: 8px; }
+.music-studio audio[hidden] { display: none; }
+.lesson-takeaway { display: flex; align-items: flex-start; gap: 10px; margin-top: 27px; padding-top: 22px; border-top: 1px solid var(--border); font-size: .9em; line-height: 1.7; }
+.lesson-takeaway svg { width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0; }
+.creation-panel { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: start; gap: 46px; }
+.creator-intro { margin-bottom: 25px; }
+.creator-intro h2 { font-size: 1.55em; font-weight: 650; line-height: 1.2; letter-spacing: -.03em; }
+.creator-intro p { margin-top: 10px; line-height: 1.65; color: var(--muted-foreground); }
+.music-form [data-slot="field-group"] { gap: 25px; }
+.music-form [data-slot="field-legend"], .music-form [data-slot="field-label"] { font-size: 1em; }
+.music-form [data-slot="input"] { min-height: 50px; font-size: 1em; }
+.music-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; gap: 10px; }
+.music-choices:has(> :last-child:nth-child(2)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.music-choice[data-slot="toggle-group-item"] { position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 12px; white-space: normal; height: auto; min-height: 122px; padding: 15px 12px; font-size: 1em; text-align: left; }
+.music-choice > svg:first-child { width: 24px; height: 24px; }
+.music-choice strong { font-weight: 600; font-size: .93em; display: block; line-height: 1.4; }
+.music-choice small { display: block; font-size: .74em; line-height: 1.6; margin-top: 4px; color: var(--muted-foreground); }
+.music-choice .choice-check { position: absolute; top: 12px; right: 10px; width: 17px; height: 17px; opacity: 0; }
+.music-choice[data-state="on"] .choice-check { opacity: 1; }
+.music-choice[data-state="on"] { outline: 2px solid var(--primary); outline-offset: -2px; }
+.create-action { display: flex; flex-wrap: wrap; gap: 12px; }
+.create-action > button[type="submit"] { min-width: 220px; }
+.studio-fine-print { font-size: .8em; line-height: 1.75; color: var(--muted-foreground); }
+.choice-carried { display: flex; align-items: center; gap: 8px; margin: -5px 0 25px; font-size: .85em; line-height: 1.5; }
+.choice-carried svg { width: 18px; height: 18px; flex-shrink: 0; }
+.your-music { display: flex; flex-direction: column; gap: 18px; background: var(--card); padding: 25px; border: 1px solid var(--border); border-radius: 18px; }
+.your-music h2 { font-size: 1.2em; font-weight: 650; }
+.your-music > div > svg { width: 21px; height: 21px; }
+.piece-cover { padding: 22px; border-radius: 10px; background: var(--person-bg); color: var(--person-ink); }
+.piece-cover-title { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: .65em; }
+.piece-cover .music-score { padding-left: 35px; padding-top: 20px; padding-bottom: 18px; }
+.piece-cover .score-grid { height: 95px; }
+.piece-cover .score-note { height: 18px; }
+.piece-cover h3 { font-weight: 700; font-size: 1.5em; line-height: 1.2; overflow-wrap: anywhere; }
+.piece-cover > p { font-size: .75em; margin-top: 8px; }
+.piece-description { line-height: 1.8; font-size: .94em; }
+.song-status { font-size: .9em; line-height: 1.65; }
+.changed-note { display: flex; align-items: flex-start; gap: 8px; font-size: .83em; line-height: 1.7; }
+.changed-note svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; }
+.studio-about { margin-top: 48px; border-block: 1px solid var(--border); }
+.studio-about summary { min-height: 60px; padding: 18px 0; cursor: pointer; font-size: .95em; line-height: 1.6; }
+.studio-about summary:focus-visible { outline: 3px solid var(--ring); outline-offset: 4px; }
+.studio-about > div { padding: 0 0 26px; max-width: 70ch; }
+.studio-about h2 { font-size: 1.4em; font-weight: 650; margin: 8px 0 12px; }
+.studio-about p, .studio-about li { line-height: 1.8; font-size: .92em; margin: 12px 0; }
+.studio-about li { display: flex; gap: 10px; }
+.studio-about li svg { width: 18px; height: 18px; margin-top: 5px; flex-shrink: 0; }
+.studio-about a { display: inline-block; padding: 12px 0; text-decoration: underline; text-underline-offset: 4px; }
+.studio-footer { display: flex; flex-wrap: wrap; gap: 15px 24px; justify-content: space-between; align-items: center; padding: 28px 0 35px; color: var(--muted-foreground); font-size: .8em; }
+.studio-footer a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 1050px) {
+  .studio-welcome { gap: 28px; }
+  .knowledge-panel { grid-template-columns: 185px minmax(0, 1fr); gap: 25px; }
+  .lesson-title-row { flex-direction: column; gap: 15px; }
+  .creation-panel { gap: 25px; }
+  .music-choices { grid-template-columns: 1fr; }
+  .music-choice[data-slot="toggle-group-item"] { min-height: 74px; flex-direction: row; align-items: center; padding: 14px; gap: 14px; }
+  .music-choice > span { padding-right: 18px; }
+  .music-choice .choice-check { top: 16px; }
+}
+@media (max-width: 760px) {
+  .studio-welcome { grid-template-columns: 1fr; padding: 35px 0 25px; }
+  .studio-welcome h1 { font-size: 2.9em; }
+  .welcome-score { max-width: 540px; transform: none; padding: 22px; }
+  .welcome-score .score-grid { height: 90px; }
+  .welcome-score .score-caption { flex-direction: row; flex-wrap: wrap; gap: 4px 12px; }
+  .knowledge-panel { grid-template-columns: 1fr; gap: 25px; }
+  .topic-options { flex-direction: row; flex-wrap: wrap; margin-top: 15px; }
+  .topic-options [data-slot="toggle-group-item"] { flex: 1; min-width: 82px; justify-content: center; padding: 12px; }
+  .lesson-topics > p { margin-top: 5px; }
+  .creation-panel { grid-template-columns: 1fr; }
+  .music-choices { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .music-choice[data-slot="toggle-group-item"] { flex-direction: column; align-items: flex-start; }
+  .music-choice > span { padding-right: 0; }
+  .music-studio[data-large-text="true"] .music-choices { grid-template-columns: 1fr; }
+  .music-studio[data-large-text="true"] .music-choice { flex-direction: row; align-items: center; }
+  .studio-header nav { gap: 14px; }
+  .studio-current-link { display: none; }
+}
+@media (max-width: 480px) {
+  .studio-header { gap: 12px; min-height: 87px; }
+  .studio-header nav { gap: 6px; }
+  .studio-team-link { font-size: 14px; gap: 5px; }
+  .studio-welcome h1 { font-size: 2.65em; }
+  .welcome-actions { align-items: stretch; flex-direction: column; }
+  .welcome-actions [data-slot="button"] { justify-content: flex-start; }
+  .studio-tools { align-items: flex-start; }
+  .studio-tool-buttons { gap: 6px; }
+  .studio-tabs[data-slot="tabs-list"] { width: 100%; }
+  .studio-tabs [data-slot="tabs-trigger"] { padding: 12px 10px; gap: 7px; }
+  .lesson-page { padding: 22px 18px; }
+  .lesson-title-row h3 { font-size: 1.55em; }
+  .lesson-examples { grid-template-columns: 1fr; gap: 25px; }
+  .lesson-example > p { margin-bottom: 10px; }
+  .example-pattern { height: 65px; padding-block: 9px; }
+  .music-choices { grid-template-columns: 1fr; }
+  .music-choices:has(> :last-child:nth-child(2)) { grid-template-columns: 1fr; }
+  .music-choice[data-slot="toggle-group-item"] { flex-direction: row; align-items: center; }
+  .music-choice > span { padding-right: 15px; }
+  .your-music { padding: 20px; }
+  .piece-cover { padding: 18px; }
+  .studio-footer { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .studio-footer > span { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .music-studio *, .music-studio *::before, .music-studio *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .music-studio .score-note[data-playing="true"] { outline: none; }
+}
